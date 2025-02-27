@@ -1,0 +1,64 @@
+n_runs: 1
+experiment: "bci-competition-IV2a"
+data_dir: "../Datasets/BCICompetition-IV2a/"  ##### ~ replace with your own data path
+dataset_name: "BCICompIV2a"
+checkpoint: "./checkpoints/"  #save model weights
+output: ""
+approach: 'ca4mi'
+
+orth: "yes"
+pro_loss_reg: 0.05
+
+
+lam: 1
+adv: 0.05
+orth_reg: 0.1
+seed: 0
+alpha: 0.5
+
+n_times: 1000
+n_chans: 22
+n_subjects: 9
+n_classes: 2  # replace with 4 for 4 class 2a dataset
+
+use_memory: "yes"
+n_samples: 20
+global_reservoir_size : 500
+
+use_prototypes: 'yes'
+max_prototypes: 40
+align: 'yes'
+mixup: 'yes'
+
+#### Encoder
+encoder_lr: 0.001
+encoder_wd: 0.03
+shared_step: 2
+#### Discriminator
+discriminator_lr: 0.001
+discriminator_wd: 0.03
+discriminator_step: 1
+
+lr_factor: 3
+lr_min: 1.0e-07
+lr_patience: 7
+mom: 0.9
+
+
+inputsize: [288, 22, 1000] #Set [576, 22, 1000] for 4 class 2a dataset.
+model: 'DCN'  # 'SCN', 'EEGNet'
+latent_dim: 128
+hidden_dim: [64, 32]
+dropout: 0.25
+nlayers: 3
+
+
+batch_size: 32 # Set 64 for 4 class 2a dataset
+n_epochs: 1
+pc_valid: 0.15
+pc_test: 0.15
+
+n_workers: 1
+device: "cuda:0"
+
+

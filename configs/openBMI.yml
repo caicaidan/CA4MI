@@ -1,0 +1,61 @@
+n_runs: 1
+experiment: "openBMI"
+data_dir: "../Datasets/openBMI/new_train_20chan/"  ##### ~ replace with your own data path
+dataset_name: "openBMI"
+checkpoint: "./checkpoints/"
+approach: 'ca4mi'
+output: ""
+
+orth: "yes"
+pro_loss_reg: 0.01
+
+lam: 1
+adv: 0.05
+orth_reg: 0.1
+seed: 0
+alpha: 0.5
+
+n_times: 1000
+n_chans: 20 #62
+n_subjects: 54
+n_classes: 2
+
+use_memory: "yes"
+n_samples: 28
+global_reservoir_size : 500
+use_prototypes: 'yes'
+max_prototypes: 108
+align: 'yes'
+mixup: 'yes'
+
+#### Encoder
+encoder_lr: 0.001
+encoder_wd: 0.03
+shared_step: 1
+#### Discriminator
+discriminator_lr: 0.001
+discriminator_wd: 0.03
+discriminator_step: 1
+
+
+lr_factor: 6
+lr_min: 1.0e-07
+lr_patience: 7
+mom: 0.9
+n_layers: 3
+
+inputsize: [400, 20, 1000]
+model: 'DCN'  # 'SCN', 'EEGNet'
+units: 175
+head_units: 28
+latent_dim: 128
+hidden_dim: [64, 32]
+dropout: 0.25
+
+batch_size: 60
+n_epochs: 200
+pc_valid: 0.15
+pc_test: 0.15
+
+n_workers: 1
+device: "cuda:0"
