@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 # Towards Continual Adaptation of Motor Imagery BCIs using Domain-Incremental Learning
 <p align="center">
-<image src='ca4mi.png' width='80%' align="center">
+<image src='CA4MI.png' width='80%' align="center">
 </p>
 
 <!-- ABOUT THE PROJECT -->
