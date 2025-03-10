@@ -219,13 +219,11 @@ class CA4MI(object):
                         shared_encoded, private_encoded = self.model.get_encoded(x, x_sub_module, sub_id)
                         adv_loss = self.adversarial_loss_s(self.discriminator(shared_encoded, t_real_D, sub_id),
                                                            t_real_D)
-                        ort_loss = self.ort_loss(shared_encoded,
-                                                 private_encoded) if self.orth == 'yes' else torch.tensor(0).to(
-                            self.device)
-                        pro_loss = self.compute_prototype_loss(shared_encoded, y,
-                                                               prototypes) if prototypes else torch.tensor(0).to(
+                        ort_loss = self.ort_loss(shared_encoded, private_encoded) if self.orth == 'yes' else torch.tensor(0).to(
                             self.device)
 
+                        pro_loss = self.compute_prototype_loss(private_encoded, y, prototypes) if prototypes else torch.tensor(0).to(
+                            self.device)
                         total_loss = cls_loss + self.adv_loss_reg * adv_loss + self.ort_loss_reg * ort_loss + (
                             self.pro_loss_reg * pro_loss if self.use_prototypes == 'yes' else 0)
                         total_loss.backward(retain_graph=True)
@@ -245,8 +243,8 @@ class CA4MI(object):
                         ort_loss = self.ort_loss(shared_encoded,
                                                  private_encoded) if self.orth == 'yes' else torch.tensor(0).to(
                             self.device)
-                        pro_loss = self.compute_prototype_loss(shared_encoded, y,
-                                                               prototypes) if prototypes else torch.tensor(0).to(
+
+                        pro_loss = self.compute_prototype_loss(private_encoded, y, prototypes) if prototypes else torch.tensor(0).to(
                             self.device)
 
                         total_loss = cls_loss + self.adv_loss_reg * adv_loss + self.ort_loss_reg * ort_loss + (
@@ -362,7 +360,7 @@ class CA4MI(object):
                     ort_loss = torch.tensor(0).to(device=self.device, dtype=torch.float32)
                     self.ort_loss_reg = 0
 
-                pro_loss = self.compute_prototype_loss(shared_out, y, prototypes)
+                pro_loss = self.compute_prototype_loss(private_out, y, prototypes)
 
                 if self.use_prototypes == 'yes':
                     total_loss = cls_loss + self.adv_loss_reg * adv_loss + self.ort_loss_reg * ort_loss + self.pro_loss_reg * pro_loss
@@ -455,7 +453,8 @@ class CA4MI(object):
                 adv_loss = self.adversarial_loss_d(output_d, t_real_D)
                 cls_loss = self.cls_loss(output, y)
 
-                pro_loss = self.compute_prototype_loss(shared_out, y, prototypes)
+
+                pro_loss = self.compute_prototype_loss(private_out, y, prototypes)
 
                 if self.use_prototypes == 'yes':
                     total_loss = cls_loss + self.adv_loss_reg * adv_loss + self.ort_loss_reg * ort_loss + self.pro_loss_reg * pro_loss

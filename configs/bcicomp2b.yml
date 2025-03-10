@@ -7,7 +7,7 @@ approach: 'ca4mi'
 output: ""
 
 orth: "yes"
-pro_loss_reg: 0.05
+pro_loss_reg: 0.02
 
 lam: 1
 adv: 0.05

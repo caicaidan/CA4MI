@@ -7,7 +7,7 @@ output: ""
 approach: 'ca4mi'
 
 orth: "yes"
-pro_loss_reg: 0.05
+pro_loss_reg: 0.02
 
 
 lam: 1
@@ -54,7 +54,7 @@ nlayers: 3
 
 
 batch_size: 32 # Set 64 for 4 class 2a dataset
-n_epochs: 1
+n_epochs: 200
 pc_valid: 0.15
 pc_test: 0.15
 
